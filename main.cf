@@ -1,0 +1,38 @@
+# Základní nastavení
+myhostname = mail.local
+mydestination = localhost
+inet_interfaces = all
+inet_protocols = ipv4
+
+# Logování do stdout (pro Docker)
+maillog_file = /dev/stdout
+
+# Úroveň debugu (0-4)
+debug_peer_level = 2
+debug_peer_list = smtp.gmail.com
+
+# Podrobné logování SMTP
+verbosity = 1
+
+# Gmail SMTP relay
+relayhost = [smtp.gmail.com]:587
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = texthash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+smtp_tls_security_level = encrypt
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+
+# Povolené sítě
+mynetworks = 127.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 10.0.0.0/8
+
+# SENDER RESTRICTIONS - POUZE povolení sendery
+smtpd_sender_restrictions = 
+  permit_mynetworks,
+  check_sender_access hash:/etc/postfix/allowed_senders,
+  reject
+
+# RECIPIENT RESTRICTIONS - POUZE @t-mobile.cz a @gmail.com
+smtpd_recipient_restrictions = 
+  permit_mynetworks,
+  check_recipient_access hash:/etc/postfix/allowed_domains,
+  reject_unauth_destination

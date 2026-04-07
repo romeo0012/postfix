@@ -1,0 +1,11 @@
+services:
+  kube-bpm-app:
+    image: ghcr.io/romeo0012/postfix:latest
+    container_name: postfix
+    ports:
+      - "25:25"
+    networks:
+      - postfix
+networks:
+  postfix:
+    driver: bridge

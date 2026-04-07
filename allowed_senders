@@ -1,0 +1,7 @@
+# Povolení konkrétních email adres
+roman.marcina@t-mobile.cz  OK
+marcina.roman@gmail.com    OK
+
+# Povolení celé domény
+@t-mobile.cz             OK
+@gmail.com               OK
